@@ -11,3 +11,5 @@ LazyData: TRUE
 RoxygenNote: 5.0.1
 URL: https://github.com/carlganz/svrepmisc
 Imports: survey, MASS, nnet, quantreg, truncreg
+BugReports: https://github.com/carlganz/svrepmisc/issues
+Suggests: covr
