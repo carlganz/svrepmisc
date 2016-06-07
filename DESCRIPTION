@@ -1,6 +1,6 @@
 Package: svrepmisc
 Type: Package
-Title: Miscellaneous Functions for Replicate Weights
+Title: svrepmisc: Miscellaneous Functions for Replicate Weights
 Version: 0.1.0
 Authors@R: person("Carl", "Ganz", email="carlganz@ucla.edu",role=c("aut","cre"))
 Maintainer: Carl Ganz <carlganz@ucla.edu>
