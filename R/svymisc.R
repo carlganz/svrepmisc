@@ -2,6 +2,7 @@
 #'
 #' Wrapper functions for Complex Surveys using replicate weights.
 #' Takes advantage of \code{\link[survey]{withReplicates}}.
+#' @import survey
 #' @docType package
 #' @name svrepmisc
 #'
@@ -45,8 +46,10 @@ wR <- function(FUN, formula, design, subset, ...) {
 #'
 #' @export
 #' @seealso \code{\link[survey]{withReplicates}} \code{\link[nnet]{multinom}}
-#'
-#' @import survey
+#' @param formula Model formula
+#' @param design Survey design from \code{\link[survey]{svrepdesign}}
+#' @param subset Expression to select a subpopulation
+#' @param ... Other arugments passed to \code{\link[nnet]{multinom}}
 #' @importFrom nnet multinom
 #'
 
@@ -73,6 +76,10 @@ svymultinom <- function(formula, design, subset, ...) {
 #' Wrapper for \code{\link[quantreg]{rq}} for replicate weights
 #'
 #' @seealso \code{\link[survey]{withReplicates}} \code{\link[quantreg]{rq}}
+#' @param formula Model formula
+#' @param design Survey design from \code{\link[survey]{svrepdesign}}
+#' @param subset Expression to select a subpopulation
+#' @param ... Other arugments passed to \code{\link[quantreg]{rq}}
 #' @importFrom quantreg rq
 #' @export
 
@@ -86,6 +93,12 @@ svyrq <- function(formula, design, subset, ...) {
 #' Wrapper for several functions from \pkg{MASS} for replicate weights
 #'
 #' @seealso \code{\link[survey]{withReplicates}} \code{\link[MASS]{polr}} \code{\link[MASS]{glm.nb}}
+#' @param formula Model formula
+#' @param design Survey design from \code{\link[survey]{svrepdesign}}
+#' @param subset Expression to select a subpopulation
+#' @param ... Other arugments passed to \code{\link[MASS]{polr}} or
+#' \code{\link[MASS]{glm.nb}} or \code{\link[MASS]{rlm}}
+#'
 #' @importFrom MASS polr
 #' @export
 
@@ -98,7 +111,7 @@ svypolr <- function(formula, design, subset, ...) {
 #' @importFrom MASS glm.nb
 #' @export
 
-svyglm.nb <- function(formula, design, subset, ...) {
+svynb <- function(formula, design, subset, ...) {
   wR(MASS::glm.nb, formula, design, subset, ...)
 
 }
@@ -117,6 +130,10 @@ svyrlm <- function(formula, design, subset, ...) {
 #' Wrapper for \code{\link[truncreg]{truncreg}} for replicate weights
 #'
 #' @importFrom truncreg truncreg
+#' @param formula Model formula
+#' @param design Survey design from \code{\link[survey]{svrepdesign}}
+#' @param subset Expression to select a subpopulation
+#' @param ... Other arugments passed to \code{\link[truncreg]{truncreg}}
 #' @export
 
 svytruncreg <- function(formula, design, subset, ...) {

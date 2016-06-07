@@ -6,6 +6,15 @@
 \usage{
 svyrq(formula, design, subset, ...)
 }
+\arguments{
+\item{formula}{Model formula}
+
+\item{design}{Survey design from \code{\link[survey]{svrepdesign}}}
+
+\item{subset}{Expression to select a subpopulation}
+
+\item{...}{Other arugments passed to \code{\link[quantreg]{rq}}}
+}
 \description{
 Wrapper for \code{\link[quantreg]{rq}} for replicate weights
 }

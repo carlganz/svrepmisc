@@ -6,6 +6,15 @@
 \usage{
 svytruncreg(formula, design, subset, ...)
 }
+\arguments{
+\item{formula}{Model formula}
+
+\item{design}{Survey design from \code{\link[survey]{svrepdesign}}}
+
+\item{subset}{Expression to select a subpopulation}
+
+\item{...}{Other arugments passed to \code{\link[truncreg]{truncreg}}}
+}
 \description{
 Wrapper for \code{\link[truncreg]{truncreg}} for replicate weights
 }
