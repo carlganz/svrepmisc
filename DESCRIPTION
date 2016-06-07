@@ -9,3 +9,4 @@ Description: Miscellaneous wrappers using survey package's withReplicates
 License: GPL-3
 LazyData: TRUE
 RoxygenNote: 5.0.1
+URL: https://github.com/carlganz/svrepmisc
