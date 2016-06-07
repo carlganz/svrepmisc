@@ -3,11 +3,14 @@
 \name{svypolr}
 \alias{svyglm.nb}
 \alias{svypolr}
+\alias{svyrlm}
 \title{Wrapper for MASS functions}
 \usage{
 svypolr(formula, design, subset, ...)
 
 svyglm.nb(formula, design, subset, ...)
+
+svyrlm(formula, design, subset, ...)
 }
 \description{
 Wrapper for several functions from \pkg{MASS} for replicate weights

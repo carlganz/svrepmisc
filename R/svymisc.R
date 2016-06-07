@@ -11,27 +11,25 @@ NULL
 wR <- function(FUN, formula, design, subset, ...) {
   # stolen from Lumley
   # surveyrep.R line 1311
-  subset<-substitute(subset)
-  subset<-eval(subset, design$variables, parent.frame())
+  subset <- substitute(subset)
+  subset <- eval(subset, design$variables, parent.frame())
   if (!is.null(subset)) {
-    design<-design[subset,]
+    design <- design[subset, ]
   }
 
-  est <- withReplicates(design,
-                        function(w,data) {
-                          environment(formula)<-environment()
+  est <- survey::withReplicates(design,
+                        function(w, data) {
+                          environment(formula) <- environment()
                           out <- match.call()
                           out$formula <- formula
                           out$data <- data
                           out$weight <- w
                           out$... <- list(...)
                           out[[1]] <- FUN
-                          summary(eval(out))$coefficients[,1]
-                        }
+                          summary(eval(out))$coefficients[, 1]
+                        })
 
-  )
-
-  attr(est,"statistic") <- "Coefficient"
+  attr(est, "statistic") <- "Coefficient"
   return(est)
 
 }
@@ -55,22 +53,20 @@ wR <- function(FUN, formula, design, subset, ...) {
 svymultinom <- function(formula, design, subset, ...) {
   # stolen from Lumley
   # surveyrep.R line 1311
-  subset<-substitute(subset)
-  subset<-eval(subset, design$variables, parent.frame())
+  subset <- substitute(subset)
+  subset <- eval(subset, design$variables, parent.frame())
   if (!is.null(subset)) {
-    design<-design[subset,]
+    design <- design[subset, ]
   }
-  est <- withReplicates(design,
-                 function(w,data){
-                   environment(formula)<-environment()
-                   summary(nnet::multinom(formula,
-                            data,weight=w,...))$coefficients
-                 }
-  )
-  attr(est,"statistic") <- "Coefficient"
+  est <- survey::withReplicates(design,
+                        function(w, data) {
+                          environment(formula) <- environment()
+                          summary(nnet::multinom(formula,
+                                                 data, weight = w, ...))$coefficients
+                        })
+  attr(est, "statistic") <- "Coefficient"
   return(est)
 }
-
 
 #' Wrapper for Quantile Regression
 #'
@@ -81,8 +77,7 @@ svymultinom <- function(formula, design, subset, ...) {
 #' @export
 
 svyrq <- function(formula, design, subset, ...) {
-
-  wR(quantreg::rq,formula,design,subset,...)
+  wR(quantreg::rq, formula, design, subset, ...)
 
 }
 
@@ -95,17 +90,36 @@ svyrq <- function(formula, design, subset, ...) {
 #' @export
 
 svypolr <- function(formula, design, subset, ...) {
-
-  wR(MASS::polr,formula,design,subset,...)
+  wR(MASS::polr, formula, design, subset, ...)
 
 }
+
 #' @rdname svypolr
 #' @importFrom MASS glm.nb
 #' @export
 
 svyglm.nb <- function(formula, design, subset, ...) {
-
-  wR(MASS::glm.nb,formula,design,subset,...)
+  wR(MASS::glm.nb, formula, design, subset, ...)
 
 }
 
+#' @rdname svypolr
+#' @importFrom MASS rlm
+#' @export
+
+svyrlm <- function(formula, design, subset, ...) {
+  wR(MASS::rlm, formula, design, subset, ...)
+
+}
+
+#' Wrapper for Truncated Response Model
+#'
+#' Wrapper for \code{\link[truncreg]{truncreg}} for replicate weights
+#'
+#' @importFrom truncreg truncreg
+#' @export
+
+svytruncreg <- function(formula, design, subset, ...) {
+  wR(truncreg::truncreg, formula, design, subset, ...)
+
+}
