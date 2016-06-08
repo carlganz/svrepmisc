@@ -20,6 +20,9 @@ svyrq(formula, design, subset, ..., scale.weights = FALSE)
 \description{
 Wrapper for \code{\link[quantreg]{rq}} for replicate weights
 }
+\note{
+\code{scale.weights} defaults to false but Lumley recommends rescaling weights
+}
 \seealso{
 \code{\link[survey]{withReplicates}} \code{\link[quantreg]{rq}}
 }

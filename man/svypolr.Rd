@@ -27,6 +27,9 @@ svyrlm(formula, design, subset, ..., scale.weights = FALSE)
 \description{
 Wrapper for several functions from \pkg{MASS} for replicate weights
 }
+\note{
+\code{scale.weights} defaults to false but Lumley recommends rescaling weights
+}
 \seealso{
 \code{\link[survey]{withReplicates}} \code{\link[MASS]{polr}} \code{\link[MASS]{glm.nb}}
 }

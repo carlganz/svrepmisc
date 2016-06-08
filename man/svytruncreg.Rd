@@ -20,4 +20,7 @@ svytruncreg(formula, design, subset, ..., scale.weights = FALSE)
 \description{
 Wrapper for \code{\link[truncreg]{truncreg}} for replicate weights
 }
+\note{
+\code{scale.weights} defaults to false but Lumley recommends rescaling weights
+}
 
