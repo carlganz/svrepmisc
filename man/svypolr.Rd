@@ -6,11 +6,11 @@
 \alias{svyrlm}
 \title{Wrapper for MASS functions}
 \usage{
-svypolr(formula, design, subset, ...)
+svypolr(formula, design, subset, ..., scale.weights = FALSE)
 
-svynb(formula, design, subset, ...)
+svynb(formula, design, subset, ..., scale.weights = FALSE)
 
-svyrlm(formula, design, subset, ...)
+svyrlm(formula, design, subset, ..., scale.weights = FALSE)
 }
 \arguments{
 \item{formula}{Model formula}
@@ -21,6 +21,8 @@ svyrlm(formula, design, subset, ...)
 
 \item{...}{Other arugments passed to \code{\link[MASS]{polr}} or
 \code{\link[MASS]{glm.nb}} or \code{\link[MASS]{rlm}}}
+
+\item{scale.weights}{Indicate whether to rescale weights (defaults to false)}
 }
 \description{
 Wrapper for several functions from \pkg{MASS} for replicate weights

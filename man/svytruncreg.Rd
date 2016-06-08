@@ -4,7 +4,7 @@
 \alias{svytruncreg}
 \title{Wrapper for Truncated Response Model}
 \usage{
-svytruncreg(formula, design, subset, ...)
+svytruncreg(formula, design, subset, ..., scale.weights = FALSE)
 }
 \arguments{
 \item{formula}{Model formula}
@@ -14,6 +14,8 @@ svytruncreg(formula, design, subset, ...)
 \item{subset}{Expression to select a subpopulation}
 
 \item{...}{Other arugments passed to \code{\link[truncreg]{truncreg}}}
+
+\item{scale.weights}{Indicate whether to rescale weights (defaults to false)}
 }
 \description{
 Wrapper for \code{\link[truncreg]{truncreg}} for replicate weights

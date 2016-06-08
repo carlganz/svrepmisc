@@ -4,7 +4,7 @@
 \alias{svymultinom}
 \title{Wrapper for Multinomial Logistic Regression for Replicate Weights}
 \usage{
-svymultinom(formula, design, subset, ...)
+svymultinom(formula, design, subset, ..., scale.weights = FALSE)
 }
 \arguments{
 \item{formula}{Model formula}
@@ -14,6 +14,8 @@ svymultinom(formula, design, subset, ...)
 \item{subset}{Expression to select a subpopulation}
 
 \item{...}{Other arugments passed to \code{\link[nnet]{multinom}}}
+
+\item{scale.weights}{Indicate whether to rescale weights (defaults to false)}
 }
 \description{
 Uses \code{\link[survey]{withReplicates}} and \code{\link[nnet]{multinom}} to generate

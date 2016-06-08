@@ -4,7 +4,7 @@
 \alias{svyrq}
 \title{Wrapper for Quantile Regression}
 \usage{
-svyrq(formula, design, subset, ...)
+svyrq(formula, design, subset, ..., scale.weights = FALSE)
 }
 \arguments{
 \item{formula}{Model formula}
@@ -14,6 +14,8 @@ svyrq(formula, design, subset, ...)
 \item{subset}{Expression to select a subpopulation}
 
 \item{...}{Other arugments passed to \code{\link[quantreg]{rq}}}
+
+\item{scale.weights}{Indicate whether to rescale weights (defaults to false)}
 }
 \description{
 Wrapper for \code{\link[quantreg]{rq}} for replicate weights

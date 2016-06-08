@@ -59,8 +59,8 @@ wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
 #' @importFrom nnet multinom
 #'
 
-svymultinom <- function(formula, design, subset, ...) {
-  wR(nnet::multinom,formula,design,subset,...)
+svymultinom <- function(formula, design, subset, ..., scale.weights=FALSE) {
+  wR(nnet::multinom,formula,design,subset,..., scale.weights)
 
 }
 
@@ -77,8 +77,8 @@ svymultinom <- function(formula, design, subset, ...) {
 #' @importFrom quantreg rq
 #' @export
 
-svyrq <- function(formula, design, subset, ...) {
-  wR(quantreg::rq, formula, design, subset, ...)
+svyrq <- function(formula, design, subset, ..., scale.weights=FALSE) {
+  wR(quantreg::rq, formula, design, subset, ..., scale.weights)
 
 }
 
@@ -97,8 +97,8 @@ svyrq <- function(formula, design, subset, ...) {
 #' @importFrom MASS polr
 #' @export
 
-svypolr <- function(formula, design, subset, ...) {
-  wR(MASS::polr, formula, design, subset, ...)
+svypolr <- function(formula, design, subset, ..., scale.weights=FALSE) {
+  wR(MASS::polr, formula, design, subset, ..., scale.weights)
 
 }
 
@@ -106,8 +106,8 @@ svypolr <- function(formula, design, subset, ...) {
 #' @importFrom MASS glm.nb
 #' @export
 
-svynb <- function(formula, design, subset, ...) {
-  wR(MASS::glm.nb, formula, design, subset, ...)
+svynb <- function(formula, design, subset, ..., scale.weights=FALSE) {
+  wR(MASS::glm.nb, formula, design, subset, ..., scale.weights)
 
 }
 
@@ -115,8 +115,8 @@ svynb <- function(formula, design, subset, ...) {
 #' @importFrom MASS rlm
 #' @export
 
-svyrlm <- function(formula, design, subset, ...) {
-  wR(MASS::rlm, formula, design, subset, ...)
+svyrlm <- function(formula, design, subset, ..., scale.weights=FALSE) {
+  wR(MASS::rlm, formula, design, subset, ..., scale.weights)
 
 }
 
@@ -132,7 +132,7 @@ svyrlm <- function(formula, design, subset, ...) {
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
 #' @export
 
-svytruncreg <- function(formula, design, subset, ...) {
-  wR(truncreg::truncreg, formula, design, subset, ...)
+svytruncreg <- function(formula, design, subset, ..., scale.weights=FALSE) {
+  wR(truncreg::truncreg, formula, design, subset, ..., scale.weights)
 
 }
