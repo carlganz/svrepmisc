@@ -12,28 +12,23 @@ NULL
 wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
   # stolen from Lumley
   # surveyrep.R line 1311
+  if (!missing(subset)) {
   subset <- substitute(subset)
   subset <- eval(subset, design$variables, parent.frame())
   if (!is.null(subset)) {
     design <- design[subset, ]
   }
-
-  # per Lumley textbook appendix E, often better to rescale weights
-  if (scale.weights) {
-    design$pweights <- design$pweights/mean(design$pweights)
   }
 
   est <- survey::withReplicates(design,
                         function(w, data) {
                           environment(formula) <- environment()
-                          out <- match.call()
-                          out$formula <- formula
-                          out$data <- data
-                          out$weight <- w
-                          out$... <- list(...)
-                          out[[1]] <- FUN
-                          coef(eval(out))
-                        })
+                          vals <- coef(FUN(formula=formula,data=data,weights=w,...))
+                          if (is.matrix(vals)) {
+                            vals <- mat2vec(vals)
+                          }
+                          return(vals)
+                        }, scale.weights=scale.weights)
 
   attr(est, "statistic") <- "Coefficient"
   return(est)
@@ -61,7 +56,7 @@ wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
 #'
 
 svymultinom <- function(formula, design, subset, ..., scale.weights=FALSE) {
-  wR(nnet::multinom,formula,design,subset,..., scale.weights)
+  wR(nnet::multinom,formula,design,subset,..., scale.weights=scale.weights)
 
 }
 
@@ -80,7 +75,7 @@ svymultinom <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @export
 
 svyrq <- function(formula, design, subset, ..., scale.weights=FALSE) {
-  wR(quantreg::rq, formula, design, subset, ..., scale.weights)
+  wR(quantreg::rq, formula, design, subset, ..., scale.weights=scale.weights)
 
 }
 
@@ -100,7 +95,7 @@ svyrq <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @export
 
 svypolr <- function(formula, design, subset, ..., scale.weights=FALSE) {
-  wR(MASS::polr, formula, design, subset, ..., scale.weights)
+  wR(MASS::polr, formula, design, subset, ..., scale.weights=scale.weights)
 
 }
 
@@ -109,7 +104,7 @@ svypolr <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @export
 
 svynb <- function(formula, design, subset, ..., scale.weights=FALSE) {
-  wR(MASS::glm.nb, formula, design, subset, ..., scale.weights)
+  wR(MASS::glm.nb, formula, design, subset, ..., scale.weights=scale.weights)
 
 }
 
@@ -118,7 +113,7 @@ svynb <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @export
 
 svyrlm <- function(formula, design, subset, ..., scale.weights=FALSE) {
-  wR(MASS::rlm, formula, design, subset, ..., scale.weights)
+  wR(MASS::rlm, formula, design, subset, ..., scale.weights=scale.weights)
 
 }
 
@@ -136,6 +131,23 @@ svyrlm <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @export
 
 svytruncreg <- function(formula, design, subset, ..., scale.weights=FALSE) {
-  wR(truncreg::truncreg, formula, design, subset, ..., scale.weights)
+  wR(truncreg::truncreg, formula, design, subset, ..., scale.weights=scale.weights)
 
+}
+
+#' Wrapper for Interval Regression
+#'
+#' Wrapper for \code{\link[intReg]{intReg}} for replicate weights
+#'
+#' @importFrom intReg intReg
+#' @param formula Model formula
+#' @param design Survey design from \code{\link[survey]{svrepdesign}}
+#' @param subset Expression to select a subpopulation
+#' @param ... Other arugments passed to \code{\link[intReg]{intReg}}
+#' @param scale.weights Indicate whether to rescale weights (defaults to false)
+#' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
+#' @export
+
+svyintReg <- function(formula, design, subset, ..., scale.weights=FALSE) {
+  wR(intReg::intReg,formula,design,subset,...,scale.weights=scale.weights)
 }
