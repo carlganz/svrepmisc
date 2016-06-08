@@ -9,13 +9,18 @@
 NULL
 
 # helper function
-wR <- function(FUN, formula, design, subset, ...) {
+wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
   # stolen from Lumley
   # surveyrep.R line 1311
   subset <- substitute(subset)
   subset <- eval(subset, design$variables, parent.frame())
   if (!is.null(subset)) {
     design <- design[subset, ]
+  }
+
+  # per Lumley textbook appendix E, often better to rescale weights
+  if (scale.weights) {
+    design$pweights <- design$pweights/mean(design$pweights)
   }
 
   est <- survey::withReplicates(design,
@@ -27,7 +32,7 @@ wR <- function(FUN, formula, design, subset, ...) {
                           out$weight <- w
                           out$... <- list(...)
                           out[[1]] <- FUN
-                          summary(eval(out))$coefficients[, 1]
+                          coef(eval(out))
                         })
 
   attr(est, "statistic") <- "Coefficient"
@@ -50,25 +55,13 @@ wR <- function(FUN, formula, design, subset, ...) {
 #' @param design Survey design from \code{\link[survey]{svrepdesign}}
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[nnet]{multinom}}
+#' @param scale.weights Indicate whether to rescale weights (defaults to false)
 #' @importFrom nnet multinom
 #'
 
 svymultinom <- function(formula, design, subset, ...) {
-  # stolen from Lumley
-  # surveyrep.R line 1311
-  subset <- substitute(subset)
-  subset <- eval(subset, design$variables, parent.frame())
-  if (!is.null(subset)) {
-    design <- design[subset, ]
-  }
-  est <- survey::withReplicates(design,
-                        function(w, data) {
-                          environment(formula) <- environment()
-                          summary(nnet::multinom(formula,
-                                                 data, weight = w, ...))$coefficients
-                        })
-  attr(est, "statistic") <- "Coefficient"
-  return(est)
+  wR(nnet::multinom,formula,design,subset,...)
+
 }
 
 #' Wrapper for Quantile Regression
@@ -80,6 +73,7 @@ svymultinom <- function(formula, design, subset, ...) {
 #' @param design Survey design from \code{\link[survey]{svrepdesign}}
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[quantreg]{rq}}
+#' @param scale.weights Indicate whether to rescale weights (defaults to false)
 #' @importFrom quantreg rq
 #' @export
 
@@ -98,6 +92,7 @@ svyrq <- function(formula, design, subset, ...) {
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[MASS]{polr}} or
 #' \code{\link[MASS]{glm.nb}} or \code{\link[MASS]{rlm}}
+#' @param scale.weights Indicate whether to rescale weights (defaults to false)
 #'
 #' @importFrom MASS polr
 #' @export
@@ -134,6 +129,7 @@ svyrlm <- function(formula, design, subset, ...) {
 #' @param design Survey design from \code{\link[survey]{svrepdesign}}
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[truncreg]{truncreg}}
+#' @param scale.weights Indicate whether to rescale weights (defaults to false)
 #' @export
 
 svytruncreg <- function(formula, design, subset, ...) {
