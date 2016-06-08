@@ -56,6 +56,7 @@ wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[nnet]{multinom}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
+#' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
 #' @importFrom nnet multinom
 #'
 
@@ -74,6 +75,7 @@ svymultinom <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[quantreg]{rq}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
+#' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
 #' @importFrom quantreg rq
 #' @export
 
@@ -93,7 +95,7 @@ svyrq <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @param ... Other arugments passed to \code{\link[MASS]{polr}} or
 #' \code{\link[MASS]{glm.nb}} or \code{\link[MASS]{rlm}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
-#'
+#' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
 #' @importFrom MASS polr
 #' @export
 
@@ -130,6 +132,7 @@ svyrlm <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[truncreg]{truncreg}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
+#' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
 #' @export
 
 svytruncreg <- function(formula, design, subset, ..., scale.weights=FALSE) {
