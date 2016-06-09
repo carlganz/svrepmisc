@@ -8,3 +8,25 @@ mat2vec <- function(X) {
   names(X) <- rows
   X
 }
+
+
+#' @export
+print.svrepstatmisc <- function(x, df.residual=NULL, ...) {
+  ### COPY AND PASTED FROM LUMLEY
+  if (is.list(x)){
+    x<-x[[1]]
+  }
+  vv<-sqrt(diag(as.matrix(attr(x,"var"))))
+
+  if (!is.null(df.residual)) {
+    df.residual <- attr(x, "df.residual")
+  }
+
+  tvals <- x/vv
+  attributes(tvals) <- NULL
+  pvals <- pt(tvals,df.residual)
+  m <- cbind(x,vv,tvals,pvals)
+  colnames(m)<-c(attr(x,"statistic"),"SE", "t value", "Pr(>|t|)")
+  printCoefmat(m)
+
+}
