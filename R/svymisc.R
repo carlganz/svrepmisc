@@ -31,6 +31,7 @@ wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
                         }, scale.weights=scale.weights)
 
   attr(est, "statistic") <- "Coefficient"
+  class(est) <- c("svrepstatmisc",class(est))
   return(est)
 
 }
