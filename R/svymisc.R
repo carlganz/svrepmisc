@@ -87,19 +87,9 @@ svyrq <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @param formula Model formula
 #' @param design Survey design from \code{\link[survey]{svrepdesign}}
 #' @param subset Expression to select a subpopulation
-#' @param ... Other arugments passed to \code{\link[MASS]{polr}} or
-#' \code{\link[MASS]{glm.nb}} or \code{\link[MASS]{rlm}}
+#' @param ... Other arugments passed to \code{\link[MASS]{glm.nb}} or \code{\link[MASS]{rlm}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
 #' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
-#' @importFrom MASS polr
-#' @export
-
-svypolr <- function(formula, design, subset, ..., scale.weights=FALSE) {
-  wR(MASS::polr, formula, design, subset, ..., scale.weights=scale.weights)
-
-}
-
-#' @rdname svypolr
 #' @importFrom MASS glm.nb
 #' @export
 
@@ -108,7 +98,7 @@ svynb <- function(formula, design, subset, ..., scale.weights=FALSE) {
 
 }
 
-#' @rdname svypolr
+#' @rdname svynb
 #' @importFrom MASS rlm
 #' @export
 
