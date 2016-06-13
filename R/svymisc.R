@@ -3,6 +3,9 @@
 #' Wrapper functions for Complex Surveys using replicate weights.
 #' Takes advantage of \code{\link[survey]{withReplicates}}.
 #' @import survey
+#' @importFrom stats coef
+#' @importFrom stats printCoefmat
+#' @importFrom stats pt
 #' @docType package
 #' @name svrepmisc
 #'
@@ -31,6 +34,9 @@ wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
                         }, scale.weights=scale.weights)
 
   attr(est, "statistic") <- "Coefficient"
+  class(est) <- c("svrepstatmisc",class(est))
+  df.residual <- degf(design)+1-length(est)
+  attr(est, "df.residual") <- df.residual
   return(est)
 
 }
