@@ -118,6 +118,8 @@ svyrlm <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @param ... Other arugments passed to \code{\link[truncreg]{truncreg}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
 #' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
+#' @note weights in \code{\link[truncreg]{truncreg}} do not currently work so this function
+#' also doesn't work
 #' @export
 
 svytruncreg <- function(formula, design, subset, ..., scale.weights=FALSE) {
