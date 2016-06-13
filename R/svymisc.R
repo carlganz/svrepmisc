@@ -70,21 +70,29 @@ svymultinom <- function(formula, design, subset, ..., scale.weights=FALSE) {
 
 #' Wrapper for Quantile Regression
 #'
-#' Wrapper for \code{\link[quantreg]{rq}} for replicate weights
+#' Wrapper for \code{\link[quantreg]{rq}} and \code{\link[quantreg]{rqss}} for replicate weights
 #'
-#' @seealso \code{\link[survey]{withReplicates}} \code{\link[quantreg]{rq}}
+#' @seealso \code{\link[survey]{withReplicates}} \code{\link[quantreg]{rq}} \code{\link[quantreg]{rqss}}
 #' @param formula Model formula
 #' @param design Survey design from \code{\link[survey]{svrepdesign}}
 #' @param subset Expression to select a subpopulation
-#' @param ... Other arugments passed to \code{\link[quantreg]{rq}}
+#' @param ... Other arugments passed to \code{\link[quantreg]{rq}} or \code{\link[quantreg]{rqss}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
 #' @importFrom quantreg rq
+#' @importFrom quantreg rqss
 #' @export
 #' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
 #'  Hoboken, NJ: Wiley, 2010. Print.
 
 svyrq <- function(formula, design, subset, ..., scale.weights=FALSE) {
   wR(quantreg::rq, formula, design, subset, ..., scale.weights=scale.weights)
+
+}
+
+#' @export
+#' @rdname svyrq
+svyrqss <- function(formula, design, subset, ..., scale.weights=FALSE) {
+  wR(quantreg::rqss,formula,design,subset,...,scale.weights = scale.weights)
 
 }
 

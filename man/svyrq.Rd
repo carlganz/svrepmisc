@@ -2,9 +2,12 @@
 % Please edit documentation in R/svymisc.R
 \name{svyrq}
 \alias{svyrq}
+\alias{svyrqss}
 \title{Wrapper for Quantile Regression}
 \usage{
 svyrq(formula, design, subset, ..., scale.weights = FALSE)
+
+svyrqss(formula, design, subset, ..., scale.weights = FALSE)
 }
 \arguments{
 \item{formula}{Model formula}
@@ -13,18 +16,18 @@ svyrq(formula, design, subset, ..., scale.weights = FALSE)
 
 \item{subset}{Expression to select a subpopulation}
 
-\item{...}{Other arugments passed to \code{\link[quantreg]{rq}}}
+\item{...}{Other arugments passed to \code{\link[quantreg]{rq}} or \code{\link[quantreg]{rqss}}}
 
 \item{scale.weights}{Indicate whether to rescale weights (defaults to false)}
 }
 \description{
-Wrapper for \code{\link[quantreg]{rq}} for replicate weights
+Wrapper for \code{\link[quantreg]{rq}} and \code{\link[quantreg]{rqss}} for replicate weights
 }
 \references{
 Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
  Hoboken, NJ: Wiley, 2010. Print.
 }
 \seealso{
-\code{\link[survey]{withReplicates}} \code{\link[quantreg]{rq}}
+\code{\link[survey]{withReplicates}} \code{\link[quantreg]{rq}} \code{\link[quantreg]{rqss}}
 }
 
