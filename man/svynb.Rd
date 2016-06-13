@@ -2,12 +2,9 @@
 % Please edit documentation in R/svymisc.R
 \name{svynb}
 \alias{svynb}
-\alias{svyrlm}
-\title{Wrapper for MASS functions}
+\title{Wrapper for Negative Binomial}
 \usage{
 svynb(formula, design, subset, ..., scale.weights = FALSE)
-
-svyrlm(formula, design, subset, ..., scale.weights = FALSE)
 }
 \arguments{
 \item{formula}{Model formula}
@@ -16,18 +13,18 @@ svyrlm(formula, design, subset, ..., scale.weights = FALSE)
 
 \item{subset}{Expression to select a subpopulation}
 
-\item{...}{Other arugments passed to \code{\link[MASS]{glm.nb}} or \code{\link[MASS]{rlm}}}
+\item{...}{Other arugments passed to \code{\link[MASS]{glm.nb}}}
 
 \item{scale.weights}{Indicate whether to rescale weights (defaults to false)}
 }
 \description{
-Wrapper for several functions from \pkg{MASS} for replicate weights
+Wrapper for \code{\link[MASS]{glm.nb}} for replicate weights
 }
 \references{
 Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
  Hoboken, NJ: Wiley, 2010. Print.
 }
 \seealso{
-\code{\link[survey]{withReplicates}} \code{\link[MASS]{polr}} \code{\link[MASS]{glm.nb}}
+\code{\link[survey]{withReplicates}} \code{\link[MASS]{glm.nb}}
 }
 

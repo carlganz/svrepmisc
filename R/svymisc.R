@@ -88,15 +88,15 @@ svyrq <- function(formula, design, subset, ..., scale.weights=FALSE) {
 
 }
 
-#' Wrapper for MASS functions
+#' Wrapper for Negative Binomial
 #'
-#' Wrapper for several functions from \pkg{MASS} for replicate weights
+#' Wrapper for \code{\link[MASS]{glm.nb}} for replicate weights
 #'
-#' @seealso \code{\link[survey]{withReplicates}} \code{\link[MASS]{polr}} \code{\link[MASS]{glm.nb}}
+#' @seealso \code{\link[survey]{withReplicates}} \code{\link[MASS]{glm.nb}}
 #' @param formula Model formula
 #' @param design Survey design from \code{\link[survey]{svrepdesign}}
 #' @param subset Expression to select a subpopulation
-#' @param ... Other arugments passed to \code{\link[MASS]{glm.nb}} or \code{\link[MASS]{rlm}}
+#' @param ... Other arugments passed to \code{\link[MASS]{glm.nb}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
 #' @importFrom MASS glm.nb
 #' @export
@@ -105,15 +105,6 @@ svyrq <- function(formula, design, subset, ..., scale.weights=FALSE) {
 
 svynb <- function(formula, design, subset, ..., scale.weights=FALSE) {
   wR(MASS::glm.nb, formula, design, subset, ..., scale.weights=scale.weights)
-
-}
-
-#' @rdname svynb
-#' @importFrom MASS rlm
-#' @export
-
-svyrlm <- function(formula, design, subset, ..., scale.weights=FALSE) {
-  wR(MASS::rlm, formula, design, subset, ..., scale.weights=scale.weights)
 
 }
 

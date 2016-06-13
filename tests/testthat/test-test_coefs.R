@@ -29,13 +29,6 @@ test_that("coefs work for quantile", {
   expect_equal(svy,reg)
 })
 
-test_that("coefs work for rlm", {
-  svy <- as.vector(svyrlm(api00~api99+factor(sch.wide)+meals,jkstrat))
-  reg <- coef(MASS::rlm(api00~api99+factor(sch.wide)+meals,data=apistrat,weights=apistrat$pw))
-  reg <- as.vector(reg)
-  expect_equal(svy,reg)
-})
-
 test_that("coefs work for negative binomial", {
   svy <- as.vector(svynb(meals~api99+factor(sch.wide)+api00,jkstrat))
   reg <- coef(MASS::glm.nb(meals~api99+factor(sch.wide)+api00,data=apistrat,weights=apistrat$pw))
