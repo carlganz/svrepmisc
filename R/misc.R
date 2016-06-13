@@ -18,15 +18,15 @@ print.svrepstatmisc <- function(x, df.residual=NULL, ...) {
   }
   vv<-sqrt(diag(as.matrix(attr(x,"var"))))
 
-  if (!is.null(df.residual)) {
+  if (is.null(df.residual)) {
     df.residual <- attr(x, "df.residual")
   }
 
   tvals <- x/vv
   attributes(tvals) <- NULL
-  pvals <- pt(tvals,df.residual)
+  pvals <- stats::pt(tvals,df.residual)
   m <- cbind(x,vv,tvals,pvals)
   colnames(m)<-c(attr(x,"statistic"),"SE", "t value", "Pr(>|t|)")
-  printCoefmat(m)
+  stats::printCoefmat(m)
 
 }
