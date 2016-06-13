@@ -23,7 +23,7 @@ wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
   est <- survey::withReplicates(design,
                         function(w, data) {
                           environment(formula) <- environment()
-                          vals <- coef(FUN(formula=formula,data=data,weights=w,...))
+                          vals <- stats::coef(FUN(formula=formula,data=data,weights=w,...))
                           if (is.matrix(vals)) {
                             vals <- mat2vec(vals)
                           }
