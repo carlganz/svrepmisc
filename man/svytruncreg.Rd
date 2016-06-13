@@ -21,9 +21,11 @@ svytruncreg(formula, design, subset, ..., scale.weights = FALSE)
 Wrapper for \code{\link[truncreg]{truncreg}} for replicate weights
 }
 \note{
-\code{scale.weights} defaults to false but Lumley recommends rescaling weights
-
 weights in \code{\link[truncreg]{truncreg}} do not currently work so this function
 also doesn't work
+}
+\references{
+Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
+ Hoboken, NJ: Wiley, 2010. Print.
 }
 

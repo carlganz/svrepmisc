@@ -25,8 +25,10 @@ using replicate weights
 \note{
 Output is consistent with SAS's proc surveylogistic's multinomial
 survey output
-
-\code{scale.weights} defaults to false but Lumley recommends rescaling weights
+}
+\references{
+Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
+ Hoboken, NJ: Wiley, 2010. Print.
 }
 \seealso{
 \code{\link[survey]{withReplicates}} \code{\link[nnet]{multinom}}

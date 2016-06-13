@@ -20,7 +20,8 @@ svyintReg(formula, design, subset, ..., scale.weights = FALSE)
 \description{
 Wrapper for \code{\link[intReg]{intReg}} for replicate weights
 }
-\note{
-\code{scale.weights} defaults to false but Lumley recommends rescaling weights
+\references{
+Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
+ Hoboken, NJ: Wiley, 2010. Print.
 }
 

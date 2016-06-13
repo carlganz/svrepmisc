@@ -58,9 +58,10 @@ wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[nnet]{multinom}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
-#' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
 #' @importFrom nnet multinom
-#'
+#' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
+#'  Hoboken, NJ: Wiley, 2010. Print.
+
 
 svymultinom <- function(formula, design, subset, ..., scale.weights=FALSE) {
   wR(nnet::multinom,formula,design,subset,..., scale.weights=scale.weights)
@@ -77,9 +78,10 @@ svymultinom <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[quantreg]{rq}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
-#' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
 #' @importFrom quantreg rq
 #' @export
+#' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
+#'  Hoboken, NJ: Wiley, 2010. Print.
 
 svyrq <- function(formula, design, subset, ..., scale.weights=FALSE) {
   wR(quantreg::rq, formula, design, subset, ..., scale.weights=scale.weights)
@@ -96,9 +98,10 @@ svyrq <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[MASS]{glm.nb}} or \code{\link[MASS]{rlm}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
-#' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
 #' @importFrom MASS glm.nb
 #' @export
+#' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
+#'  Hoboken, NJ: Wiley, 2010. Print.
 
 svynb <- function(formula, design, subset, ..., scale.weights=FALSE) {
   wR(MASS::glm.nb, formula, design, subset, ..., scale.weights=scale.weights)
@@ -124,10 +127,11 @@ svyrlm <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[truncreg]{truncreg}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
-#' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
 #' @note weights in \code{\link[truncreg]{truncreg}} do not currently work so this function
 #' also doesn't work
 #' @export
+#' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
+#'  Hoboken, NJ: Wiley, 2010. Print.
 
 svytruncreg <- function(formula, design, subset, ..., scale.weights=FALSE) {
   wR(truncreg::truncreg, formula, design, subset, ..., scale.weights=scale.weights)
@@ -144,8 +148,9 @@ svytruncreg <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @param subset Expression to select a subpopulation
 #' @param ... Other arugments passed to \code{\link[intReg]{intReg}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
-#' @note \code{scale.weights} defaults to false but Lumley recommends rescaling weights
 #' @export
+#' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
+#'  Hoboken, NJ: Wiley, 2010. Print.
 
 svyintReg <- function(formula, design, subset, ..., scale.weights=FALSE) {
   wR(intReg::intReg,formula,design,subset,...,scale.weights=scale.weights)
