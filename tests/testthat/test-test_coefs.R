@@ -5,7 +5,7 @@ library(svrepmisc)
 library(nnet)
 library(quantreg)
 library(MASS)
-library(truncreg)
+library(crch)
 library(intReg)
 
 # use survey package example
@@ -43,9 +43,16 @@ test_that("coefs work for negative binomial", {
   expect_equal(svy,reg)
 })
 
-test_that("coefs work for truncreg", {
-  svy <- as.vector(svytruncreg(acs.core~api00+api99+factor(sch.wide)+meals,jkstrat,point=15))
-  reg <- coef(truncreg::truncreg(acs.core~api00+api99+factor(sch.wide)+meals,data=apistrat,weights=apistrat$pw,point=15))
+test_that("coefs work for truncated reg", {
+  svy <- as.vector(svytrch(acs.core~api00+api99+factor(sch.wide)+meals,jkstrat,left=15))
+  reg <- coef(crch::trch(acs.core~api00+api99+factor(sch.wide)+meals,data=apistrat,weights=apistrat$pw,left=15))
+  reg <- as.vector(reg)
+  expect_equal(svy,reg)
+})
+
+test_that("coefs work for censored reg", {
+  svy <- as.vector(svycrch(acs.core~api00+api99+factor(sch.wide)+meals,jkstrat,left=15))
+  reg <- coef(crch::crch(acs.core~api00+api99+factor(sch.wide)+meals,data=apistrat,weights=apistrat$pw,left=15))
   reg <- as.vector(reg)
   expect_equal(svy,reg)
 })

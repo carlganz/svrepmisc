@@ -24,4 +24,7 @@ Wrapper for \code{\link[intReg]{intReg}} for replicate weights
 Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
  Hoboken, NJ: Wiley, 2010. Print.
 }
+\seealso{
+\code{\link[survey]{withReplicates}} \code{\link[intReg]{intReg}}
+}
 

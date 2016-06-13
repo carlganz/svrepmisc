@@ -117,24 +117,31 @@ svynb <- function(formula, design, subset, ..., scale.weights=FALSE) {
 
 }
 
-#' Wrapper for Truncated Response Model
+#' Wrapper for Censored and Truncated Response Model
 #'
-#' Wrapper for \code{\link[truncreg]{truncreg}} for replicate weights
+#' Wrapper for \code{\link[crch]{trch}} and \code{\link[crch]{crch}} for replicate weights
 #'
-#' @importFrom truncreg truncreg
+#' @importFrom crch trch
+#' @importFrom crch crch
 #' @param formula Model formula
 #' @param design Survey design from \code{\link[survey]{svrepdesign}}
 #' @param subset Expression to select a subpopulation
-#' @param ... Other arugments passed to \code{\link[truncreg]{truncreg}}
+#' @param ... Other arugments passed to \code{\link[crch]{trch}} or \code{\link[crch]{crch}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
-#' @note weights in \code{\link[truncreg]{truncreg}} do not currently work so this function
-#' also doesn't work
 #' @export
+#' @seealso \code{\link[survey]{withReplicates}} \code{\link[crch]{trch}} \code{\link[crch]{crch}}
 #' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
 #'  Hoboken, NJ: Wiley, 2010. Print.
 
-svytruncreg <- function(formula, design, subset, ..., scale.weights=FALSE) {
-  wR(truncreg::truncreg, formula, design, subset, ..., scale.weights=scale.weights)
+svytrch <- function(formula, design, subset, ..., scale.weights=FALSE) {
+  wR(crch::trch, formula, design, subset, ..., scale.weights=scale.weights)
+
+}
+
+#' @rdname svytrch
+#' @export
+svycrch <- function(formula, design, subset, ..., scale.weights=FALSE) {
+  wR(crch::crch, formula, design, subset, ..., scale.weights=scale.weights)
 
 }
 
@@ -149,6 +156,7 @@ svytruncreg <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @param ... Other arugments passed to \code{\link[intReg]{intReg}}
 #' @param scale.weights Indicate whether to rescale weights (defaults to false)
 #' @export
+#' @seealso \code{\link[survey]{withReplicates}} \code{\link[intReg]{intReg}}
 #' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
 #'  Hoboken, NJ: Wiley, 2010. Print.
 
