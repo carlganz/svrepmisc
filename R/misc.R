@@ -7,6 +7,7 @@ mat2vec <- function(X) {
 
   names(X) <- rows
   X
+
 }
 
 

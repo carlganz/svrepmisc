@@ -35,6 +35,7 @@ wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
 
   attr(est, "statistic") <- "Coefficient"
   class(est) <- c("svrepstatmisc",class(est))
+  # from Lumley surveyrep.R line 1404
   df.residual <- degf(design)+1-length(est)
   attr(est, "df.residual") <- df.residual
   return(est)
@@ -148,4 +149,5 @@ svytruncreg <- function(formula, design, subset, ..., scale.weights=FALSE) {
 
 svyintReg <- function(formula, design, subset, ..., scale.weights=FALSE) {
   wR(intReg::intReg,formula,design,subset,...,scale.weights=scale.weights)
+
 }
