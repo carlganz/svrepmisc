@@ -1,10 +1,14 @@
 mat2vec <- function(X) {
+  if (is.vector(X)) {
+    return(X)
+  }
   levs <- colnames(X)
   rows <- rownames(X)
-  rows <- as.vector(outer(rows,levs,paste,sep="."))
-
   X <- as.vector(X)
-
+  if (is.null(levs) | is.null(rows)) {
+    return(X)
+  }
+  rows <- as.vector(outer(rows,levs,paste,sep="."))
   names(X) <- rows
   X
 
