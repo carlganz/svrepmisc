@@ -36,7 +36,7 @@ wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
   attr(est, "statistic") <- "Coefficient"
   class(est) <- c("svrepstatmisc",class(est))
   # from Lumley surveyrep.R line 1404
-  # This is also wrong and needs to be fixed
+  # This is possibly wrong
   df.residual <- degf(design)+1-length(est)
   attr(est, "df.residual") <- df.residual
   return(est)

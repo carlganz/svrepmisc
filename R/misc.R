@@ -29,6 +29,8 @@ print.svrepstatmisc <- function(x, df.residual=NULL, ...) {
 
   tvals <- x/vv
   attributes(tvals) <- NULL
+  ### probably wrong in some cases
+  ### may need pnorm in some cases
   pvals <- stats::pt(tvals,df.residual)
   m <- cbind(x,vv,tvals,pvals)
   colnames(m)<-c(attr(x,"statistic"),"SE", "t value", "Pr(>|t|)")
