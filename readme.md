@@ -10,3 +10,5 @@ The initial goal is to have easy-to-implement facsimilies for complex survey reg
 - SAS's proc surveylogistic offers multinomial logistic regression
 - Stata offers truncated, and interval regressions for survey data
 - Stata offers negative binomial regression for survey data
+- Complex Surveys: A Guide to Analysis Using R Appendix E uses negative binomial as an example for `survey::withReplicates`
+- Documentation for `survey::withReplicates` uses `quantreg::qr` as an example
