@@ -37,3 +37,31 @@ print.svrepstatmisc <- function(x, df.residual=NULL, ...) {
   stats::printCoefmat(m)
 
 }
+
+
+#' @export
+# adapted from confint.lm
+confint.svrepstatmisc <- function (object, parm, level = 0.95, df.residual=NULL, ...)
+{
+  cf <- object
+  pnames <- names(cf)
+  if (is.null(df.residual)) {
+    df.residual <- attr(object, "df.residual")
+  }
+  if (df.residual <= 0)
+    stop("Not enough duplicates to compute confidence intervals.")
+  if (missing(parm))
+    parm <- pnames
+  else if (is.numeric(parm))
+    parm <- pnames[parm]
+  a <- (1 - level)/2
+  a <- c(a, 1 - a)
+  fac <- qt(a, df.residual)
+  pct <- stats:::format.perc(a, 3)
+  ci <- array(NA, dim = c(length(parm), 2L), dimnames = list(parm,
+                                                             pct))
+  ses <- sqrt(diag(vcov(object)))[parm]
+  ci[] <- cf[parm] + ses %o% fac
+  ci
+}
+
