@@ -65,3 +65,74 @@ confint.svrepstatmisc <- function (object, parm, level = 0.95, df.residual=NULL,
   ci
 }
 
+
+
+#' A tidier for svrepstatmisc
+#'
+#' @param x a svrepstatmisc object
+#' @param conf.int whether to include a confidence interval
+#' @param conf.level confidence level of the interval, used only if \code{conf.int=TRUE}
+#' @param exponentiate whether to exponentiate the coefficient estimates and confidence intervals
+#' @param quick	whether to compute a smaller and faster version, containing only the term and estimate columns.
+#' @param ... extra arguments
+#' @importFrom stats coef
+#' @export
+
+tidy.svrepstatmisc <- function(x, conf.int = FALSE, conf.level = .95, exponentiate = FALSE, quick = FALSE, ...) {
+  if (is.list(x)){
+    x<-x[[1]]
+  }
+
+  if (quick) {
+    co <- x
+    ret <- data.frame(term = names(co), estimate = unname(co), stringsAsFactors = FALSE)
+    return(process_model(ret, x, conf.int = FALSE, exponentiate = exponentiate))
+  }
+
+
+  if (is.null(df.residual)) {
+    df.residual <- attr(x, "df.residual")
+  }
+
+  vv <- sqrt(diag(as.matrix(attr(x, "var"))))
+  tvals <- x / vv
+  attributes(tvals) <- NULL
+  if (df.residual > 0) {
+    pvals <- stats::pt(tvals, df.residual)
+  } else {
+    pvals <- NA
+    warning("Not enough replicates to compute p-values and confidence intervals.")
+  }
+
+  ret <- data.frame(
+    term = names(x),
+    estimate = unname(x),
+    std.error = vv,
+    statistic = tvals,
+    p.value = pvals,
+    stringsAsFactors = FALSE
+  )
+  process_model(ret, x, conf.int = conf.int, conf.level = conf.level, exponentiate = exponentiate, df.residual = df.residual)
+}
+
+
+process_model <- function(ret, x, conf.int = FALSE, conf.level = .95, exponentiate = FALSE, df.residual) {
+  if (exponentiate) {
+    trans <- exp
+  } else {
+    trans <- identity
+  }
+
+  if (conf.int & df.residual > 0) {
+    CI <- suppressMessages(trans(stats::confint(x, level = conf.level)))
+    colnames(CI) = c("conf.low", "conf.high")
+    CI <- as.data.frame(CI)
+    CI$term <- rownames(CI)
+    ret <- merge(ret, unrowname(CI), by = "term", all.x = TRUE)
+  }
+
+  ret$estimate <- trans(ret$estimate)
+  rownames(ret) <- NULL
+  ret
+}
+

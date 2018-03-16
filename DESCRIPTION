@@ -10,7 +10,6 @@ License: GPL-3
 LazyData: TRUE
 RoxygenNote: 5.0.1
 URL: https://github.com/carlganz/svrepmisc
-Imports: survey, MASS, nnet, quantreg, crch, intReg
+Imports: survey, MASS, nnet, quantreg, crch, intReg, broom
 BugReports: https://github.com/carlganz/svrepmisc/issues
-Suggests: covr, pander,
-    testthat
+Suggests: covr, pander, testthat
