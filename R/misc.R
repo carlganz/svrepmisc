@@ -98,7 +98,7 @@ tidy.svrepstatmisc <- function(x, conf.int = FALSE, conf.level = .95, exponentia
   tvals <- x / vv
   attributes(tvals) <- NULL
   if (df.residual > 0) {
-    pvals <- stats::pt(tvals, df.residual)
+    pvals <- 2 * stats::pt(-abs(tvals), df.residual)
   } else {
     pvals <- NA
     warning("Not enough replicates to compute p-values and confidence intervals.")
