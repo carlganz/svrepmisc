@@ -167,8 +167,8 @@ svycrch <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
 #'  Hoboken, NJ: Wiley, 2010. Print.
 
-svyintReg <- function(formula, design, subset, ..., scale.weights=FALSE) {
-  wR(intReg::intReg,formula,design,subset,...,scale.weights=scale.weights)
+svyintReg <- function(formula, design, subset, ..., scale.weights = FALSE) {
+  wR(intReg::intReg, formula, design, subset, ..., scale.weights = scale.weights)
 
 }
 
@@ -198,6 +198,6 @@ svyintReg <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' mod
 #' confint(mod)
 
-svyclm <- function(formula, design, subset, ..., scale.weights=FALSE) {
-  wR(ordinal::clm,formula,design,subset,..., scale.weights=scale.weights)
+svyclm <- function(formula, design, subset, ..., scale.weights = FALSE) {
+  wR(ordinal::clm, formula, design, subset, ..., scale.weights = scale.weights)
 }
