@@ -39,6 +39,13 @@ wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
   # This is possibly wrong
   df.residual <- degf(design)+1-length(est)
   attr(est, "df.residual") <- df.residual
+  if(df.residual <= 0)
+    warning(paste0(
+      "The number of degrees of freedom of your replicate weights design\n",
+      "is inferior to the number of estimates in your model (", length(est), ").\n",
+      "It will not be possible to compute p-values using t distribution.\n",
+      "You should consider increasing the number of replicates."
+    ))
   return(est)
 
 }
