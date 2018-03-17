@@ -197,9 +197,6 @@ svyintReg <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' mod <- svyclm(stype ~ ell + mobility, dwr)
 #' mod
 #' confint(mod)
-#' tidy(mod)
-#' tidy(mod, conf.int = TRUE, exponentiate = TRUE)
-
 
 svyclm <- function(formula, design, subset, ..., scale.weights=FALSE) {
   wR(ordinal::clm,formula,design,subset,..., scale.weights=scale.weights)
