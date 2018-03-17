@@ -31,7 +31,12 @@ print.svrepstatmisc <- function(x, df.residual=NULL, ...) {
   attributes(tvals) <- NULL
   ### probably wrong in some cases
   ### may need pnorm in some cases
-  pvals <- 2 * stats::pt(-abs(tvals), df.residual)
+  if (df.residual > 0) {
+    pvals <- 2 * stats::pt(-abs(tvals), df.residual)
+  } else {
+    pvals <- NA
+    warning("Not enough replicates to compute p-values.")
+  }
   m <- cbind(x,vv,tvals,pvals)
   colnames(m)<-c(attr(x,"statistic"),"SE", "t value", "Pr(>|t|)")
   stats::printCoefmat(m)
