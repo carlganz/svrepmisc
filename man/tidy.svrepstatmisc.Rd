@@ -4,7 +4,7 @@
 \alias{tidy.svrepstatmisc}
 \title{A tidier for svrepstatmisc}
 \usage{
-tidy.svrepstatmisc(x, conf.int = FALSE, conf.level = 0.95,
+\method{tidy}{svrepstatmisc}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, quick = FALSE, ...)
 }
 \arguments{

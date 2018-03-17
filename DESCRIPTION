@@ -11,7 +11,7 @@ Description: Miscellaneous wrappers for implementing regression types from vario
   for complex survey data using the survey package's withReplicates function.
 License: GPL-3
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 URL: https://github.com/carlganz/svrepmisc
 Imports: survey, MASS, nnet, quantreg, crch, intReg, broom, ordinal
 BugReports: https://github.com/carlganz/svrepmisc/issues
