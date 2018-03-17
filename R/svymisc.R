@@ -164,3 +164,26 @@ svyintReg <- function(formula, design, subset, ..., scale.weights=FALSE) {
   wR(intReg::intReg,formula,design,subset,...,scale.weights=scale.weights)
 
 }
+
+
+#' Wrapper for Ordinal Logistic Regression (cumulative link model) for Replicate Weights
+#'
+#' Uses \code{\link[survey]{withReplicates}} and \code{\link[ordinal]{clm}} to generate
+#' coefficients, and standards errors for ordinal logistic regressions
+#' using replicate weights
+#'
+#' @export
+#' @seealso \code{\link[survey]{withReplicates}} \code{\link[ordinal]{clm}}
+#' @param formula Model formula
+#' @param design Survey design from \code{\link[survey]{svrepdesign}}
+#' @param subset Expression to select a subpopulation
+#' @param ... Other arugments passed to \code{\link[ordinal]{clm}}
+#' @param scale.weights Indicate whether to rescale weights (defaults to false)
+#' @importFrom ordinal clm
+#' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
+#'  Hoboken, NJ: Wiley, 2010. Print.
+
+
+svyclm <- function(formula, design, subset, ..., scale.weights=FALSE) {
+  wR(ordinal::clm,formula,design,subset,..., scale.weights=scale.weights)
+}
