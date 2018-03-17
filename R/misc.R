@@ -45,6 +45,7 @@ print.svrepstatmisc <- function(x, df.residual=NULL, ...) {
 
 
 #' @export
+#' @importFrom stats qt vcov
 # adapted from confint.lm
 confint.svrepstatmisc <- function (object, parm, level = 0.95, df.residual=NULL, ...)
 {
@@ -62,14 +63,13 @@ confint.svrepstatmisc <- function (object, parm, level = 0.95, df.residual=NULL,
   a <- (1 - level)/2
   a <- c(a, 1 - a)
   fac <- qt(a, df.residual)
-  pct <- stats:::format.perc(a, 3)
+  pct <- paste(format(100 * a, trim = TRUE, scientific = FALSE, digits = 3), "%")
   ci <- array(NA, dim = c(length(parm), 2L), dimnames = list(parm,
                                                              pct))
   ses <- sqrt(diag(vcov(object)))[parm]
   ci[] <- cf[parm] + ses %o% fac
   ci
 }
-
 
 
 #' A tidier for svrepstatmisc
@@ -81,17 +81,18 @@ confint.svrepstatmisc <- function (object, parm, level = 0.95, df.residual=NULL,
 #' @param quick	whether to compute a smaller and faster version, containing only the term and estimate columns.
 #' @param ... extra arguments
 #' @importFrom stats coef
+#' @importFrom broom tidy
 #' @export
-
 tidy.svrepstatmisc <- function(x, conf.int = FALSE, conf.level = .95, exponentiate = FALSE, quick = FALSE, ...) {
   if (is.list(x)){
     x<-x[[1]]
   }
 
+  co <- as.data.frame(x)[[1]]
+
   if (quick) {
-    co <- x
-    ret <- data.frame(term = names(co), estimate = unname(co), stringsAsFactors = FALSE)
-    return(process_model(ret, x, conf.int = FALSE, exponentiate = exponentiate))
+    ret <- data.frame(term = names(x), estimate = unname(co), stringsAsFactors = FALSE)
+    return(process_svrepstatmisc(ret, x, conf.int = FALSE, exponentiate = exponentiate))
   }
 
 
@@ -111,21 +112,25 @@ tidy.svrepstatmisc <- function(x, conf.int = FALSE, conf.level = .95, exponentia
 
   ret <- data.frame(
     term = names(x),
-    estimate = unname(x),
+    estimate = unname(co),
     std.error = vv,
     statistic = tvals,
     p.value = pvals,
     stringsAsFactors = FALSE
   )
-  process_model(ret, x, conf.int = conf.int, conf.level = conf.level, exponentiate = exponentiate, df.residual = df.residual)
+  process_svrepstatmisc(ret, x, conf.int = conf.int, conf.level = conf.level, exponentiate = exponentiate, df.residual = df.residual)
 }
 
 
-process_model <- function(ret, x, conf.int = FALSE, conf.level = .95, exponentiate = FALSE, df.residual) {
+process_svrepstatmisc <- function(ret, x, conf.int = FALSE, conf.level = .95, exponentiate = FALSE, df.residual = NULL) {
   if (exponentiate) {
     trans <- exp
   } else {
     trans <- identity
+  }
+
+  if (is.null(df.residual)) {
+    df.residual <- attr(x, "df.residual")
   }
 
   if (conf.int & df.residual > 0) {
@@ -133,7 +138,8 @@ process_model <- function(ret, x, conf.int = FALSE, conf.level = .95, exponentia
     colnames(CI) = c("conf.low", "conf.high")
     CI <- as.data.frame(CI)
     CI$term <- rownames(CI)
-    ret <- merge(ret, unrowname(CI), by = "term", all.x = TRUE)
+    rownames(CI) <- NULL
+    ret <- merge(ret, CI, by = "term", all.x = TRUE)
   }
 
   ret$estimate <- trans(ret$estimate)
