@@ -31,7 +31,7 @@ print.svrepstatmisc <- function(x, df.residual=NULL, ...) {
   attributes(tvals) <- NULL
   ### probably wrong in some cases
   ### may need pnorm in some cases
-  pvals <- stats::pt(tvals,df.residual)
+  pvals <- 2 * stats::pt(-abs(tvals), df.residual)
   m <- cbind(x,vv,tvals,pvals)
   colnames(m)<-c(attr(x,"statistic"),"SE", "t value", "Pr(>|t|)")
   stats::printCoefmat(m)
