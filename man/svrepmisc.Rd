@@ -9,4 +9,3 @@
 Wrapper functions for Complex Surveys using replicate weights.
 Takes advantage of \code{\link[survey]{withReplicates}}.
 }
-

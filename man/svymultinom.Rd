@@ -33,4 +33,3 @@ Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
 \seealso{
 \code{\link[survey]{withReplicates}} \code{\link[nnet]{multinom}}
 }
-
