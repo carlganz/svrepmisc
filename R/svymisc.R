@@ -189,6 +189,16 @@ svyintReg <- function(formula, design, subset, ..., scale.weights=FALSE) {
 #' @importFrom ordinal clm
 #' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
 #'  Hoboken, NJ: Wiley, 2010. Print.
+#' @examples
+#' library(survey)
+#' data(api)
+#' d <- svydesign(id=~dnum, weights=~pw, data=apiclus1, fpc=~fpc)
+#' dwr <- as.svrepdesign(d, type = "bootstrap", replicates = 100)
+#' mod <- svyclm(stype ~ ell + mobility, dwr)
+#' mod
+#' confint(mod)
+#' tidy(mod)
+#' tidy(mod, conf.int = TRUE, exponentiate = TRUE)
 
 
 svyclm <- function(formula, design, subset, ..., scale.weights=FALSE) {
