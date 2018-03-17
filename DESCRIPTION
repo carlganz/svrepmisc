@@ -2,7 +2,10 @@ Package: svrepmisc
 Type: Package
 Title: svrepmisc: Miscellaneous Functions for Replicate Weights
 Version: 0.1.0
-Authors@R: person("Carl", "Ganz", email="carlganz@ucla.edu",role=c("aut","cre"))
+Authors@R: c(
+  person("Carl", "Ganz", email="carlganz@ucla.edu",role=c("aut","cre")),
+  person("Joseph", "Larmarange", email = "joseph@larmarange.net", role = "ctb")
+  )
 Maintainer: Carl Ganz <carlganz@ucla.edu>
 Description: Miscellaneous wrappers for implementing regression types from various packages
   for complex survey data using the survey package's withReplicates function.
