@@ -5,7 +5,7 @@
 \title{A tidier for svrepstatmisc}
 \usage{
 \method{tidy}{svrepstatmisc}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+  exponentiate = FALSE, quick = FALSE, df.residual = NULL, ...)
 }
 \arguments{
 \item{x}{a svrepstatmisc object}
@@ -17,6 +17,8 @@
 \item{exponentiate}{whether to exponentiate the coefficient estimates and confidence intervals}
 
 \item{quick}{whether to compute a smaller and faster version, containing only the term and estimate columns.}
+
+\item{df.residual}{degrees of freedom for t-distribution in confidence interval (will be extracted from \code{x} if not specified)}
 
 \item{...}{extra arguments}
 }

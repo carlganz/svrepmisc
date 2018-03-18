@@ -79,11 +79,12 @@ confint.svrepstatmisc <- function (object, parm, level = 0.95, df.residual=NULL,
 #' @param conf.level confidence level of the interval, used only if \code{conf.int=TRUE}
 #' @param exponentiate whether to exponentiate the coefficient estimates and confidence intervals
 #' @param quick	whether to compute a smaller and faster version, containing only the term and estimate columns.
+#' @param df.residual degrees of freedom for t-distribution in confidence interval (will be extracted from \code{x} if not specified)
 #' @param ... extra arguments
 #' @importFrom stats coef
 #' @importFrom broom tidy
 #' @export
-tidy.svrepstatmisc <- function(x, conf.int = FALSE, conf.level = .95, exponentiate = FALSE, quick = FALSE, ...) {
+tidy.svrepstatmisc <- function(x, conf.int = FALSE, conf.level = .95, exponentiate = FALSE, quick = FALSE, df.residual = NULL, ...) {
   if (is.list(x)){
     x<-x[[1]]
   }
