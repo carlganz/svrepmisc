@@ -30,6 +30,9 @@ dwr <- as.svrepdesign(d, type = "bootstrap", replicates = 100)
 mod <- svyclm(stype ~ ell + mobility, dwr)
 mod
 confint(mod)
+library(broom)
+tidy(mod)
+tidy(mod, exponentiate = TRUE, conf.int = TRUE)
 }
 \references{
 Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
