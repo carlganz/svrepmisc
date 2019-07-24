@@ -152,27 +152,6 @@ svycrch <- function(formula, design, subset, ..., scale.weights=FALSE) {
 
 }
 
-#' Wrapper for Interval Regression
-#'
-#' Wrapper for \code{\link[intReg]{intReg}} for replicate weights
-#'
-#' @importFrom intReg intReg
-#' @param formula Model formula
-#' @param design Survey design from \code{\link[survey]{svrepdesign}}
-#' @param subset Expression to select a subpopulation
-#' @param ... Other arugments passed to \code{\link[intReg]{intReg}}
-#' @param scale.weights Indicate whether to rescale weights (defaults to false)
-#' @export
-#' @seealso \code{\link[survey]{withReplicates}} \code{\link[intReg]{intReg}}
-#' @references Lumley, Thomas. Complex Surveys: A Guide to Analisys Using R.
-#'  Hoboken, NJ: Wiley, 2010. Print.
-
-svyintReg <- function(formula, design, subset, ..., scale.weights = FALSE) {
-  wR(intReg::intReg, formula, design, subset, ..., scale.weights = scale.weights)
-
-}
-
-
 #' Wrapper for Ordinal Logistic Regression (cumulative link model) for Replicate Weights
 #'
 #' Uses \code{\link[survey]{withReplicates}} and \code{\link[ordinal]{clm}} to generate

@@ -1,7 +1,7 @@
 Package: svrepmisc
 Type: Package
 Title: svrepmisc: Miscellaneous Functions for Replicate Weights
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: c(
   person("Carl", "Ganz", email="carlganz@ucla.edu",role=c("aut","cre")),
   person("Joseph", "Larmarange", email = "joseph@larmarange.net", role = "ctb")
@@ -11,8 +11,8 @@ Description: Miscellaneous wrappers for implementing regression types from vario
   for complex survey data using the survey package's withReplicates function.
 License: GPL-3
 LazyData: TRUE
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 URL: https://github.com/carlganz/svrepmisc
-Imports: survey, MASS, nnet, quantreg, crch, intReg, broom, ordinal
+Imports: survey, MASS, nnet, quantreg, crch, broom, ordinal
 BugReports: https://github.com/carlganz/svrepmisc/issues
 Suggests: covr, pander, testthat

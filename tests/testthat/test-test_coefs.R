@@ -6,7 +6,6 @@ library(nnet)
 library(quantreg)
 library(MASS)
 library(crch)
-library(intReg)
 
 # use survey package example
 # replicate weights - jackknife (this is slower)
@@ -53,17 +52,6 @@ test_that("coefs work for truncated reg", {
 test_that("coefs work for censored reg", {
   svy <- as.vector(svycrch(acs.core~api00+api99+factor(sch.wide)+meals,jkstrat,left=15))
   reg <- coef(crch::crch(acs.core~api00+api99+factor(sch.wide)+meals,data=apistrat,weights=apistrat$pw,left=15))
-  reg <- as.vector(reg)
-  expect_equal(svy,reg)
-})
-
-test_that("coefs work for intreg",{
-  newVar <- sample(1:3,200,replace=TRUE)
-  apistrat$low <- c(10000,50000,100000)[newVar]
-  apistrat$high <- c(49999,99999,199999)[newVar]
-  jkstrat <- update(jkstrat,low = c(10000,50000,100000)[newVar],high = c(49999,99999,199999)[newVar])
-  svy <- as.vector(svyintReg(cbind(low,high)~api00+api99+factor(sch.wide)+meals,jkstrat))
-  reg <- coef(intReg(cbind(low,high)~api00+api99+factor(sch.wide)+meals,data=apistrat,weights=apistrat$pw))
   reg <- as.vector(reg)
   expect_equal(svy,reg)
 })
