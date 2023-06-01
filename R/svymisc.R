@@ -46,6 +46,8 @@ wR <- function(FUN, formula, design, subset, ..., scale.weights=FALSE) {
       "It will not be possible to compute p-values using t distribution.\n",
       "You should consider increasing the number of replicates."
     ))
+  attr(est, "formula") <- formula
+  attr(est, "svrep.design") <- design
   return(est)
 
 }
